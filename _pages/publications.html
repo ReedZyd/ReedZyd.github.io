@@ -5,32 +5,363 @@ permalink: /publications/
 author_profile: true
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
 
-{% include base_path %}
+ 
+<style>
+  /* ===== Publications (scoped) + Theme vars ===== */
+  :root{
+    /* --pub-bg: #ffffff; */
+    --pub-text: #111827;
+    --pub-muted: #444444;
+    --pub-border: #e5e7eb;
 
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
-    {% endfor %}
-  {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% endif %}
+    --card-bg: #ffffff;
+    --card-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    --card-shadow-hover: 0 6px 18px rgba(0,0,0,0.08);
+
+    --tag-bg: #f3f4f6;
+    --tag-text: #111827;
+    --tag-venue-bg: #ecfeff;
+    --tag-venue-text: #155e75;
+    --tag-topic-bg: #eef2ff;
+    --tag-topic-text: #3730a3;
+    --tag-status-bg: #fff7ed;
+    --tag-status-text: #9a3412;
+
+    --btn-bg: #e8f0fe;          /* light blue */
+    --btn-text: #1f3a8a;        /* deep blue */
+    --btn-border: #c7d2fe;
+
+    --btn-hover-bg: #1f3a8a;
+    --btn-hover-text: #ffffff;
+    --btn-hover-border: #1f3a8a;
+
+    --link: #0f766e;
+  }
+
+  /* System dark */
+  @media (prefers-color-scheme: dark){
+    :root{
+      --pub-bg: transparent;      /* let site background show */
+      --pub-text: #e5e7eb;
+      --pub-muted: #a3a3a3;
+      --pub-border: #243042;
+
+      --card-bg: #111827;         /* dark card */
+      --card-shadow: 0 1px 2px rgba(0,0,0,0.35);
+      --card-shadow-hover: 0 10px 26px rgba(0,0,0,0.45);
+
+      --tag-bg: #1f2937;
+      --tag-text: #e5e7eb;
+      --tag-venue-bg: #083344;
+      --tag-venue-text: #67e8f9;
+      --tag-topic-bg: #1e1b4b;
+      --tag-topic-text: #c7d2fe;
+      --tag-status-bg: #3a1f0a;
+      --tag-status-text: #fdba74;
+
+      --btn-bg: #1f2a3a;
+      --btn-text: #e5e7eb;
+      --btn-border: #39485f;
+      --btn-hover-bg: #e5e7eb;
+      --btn-hover-text: #0b1220;
+      --btn-hover-border: #e5e7eb;
+
+      --link: #5eead4;
+    }
+  }
+
+  /* Manual toggle support (common in themes) */
+  html[data-theme="dark"],
+  html.dark,
+  body.dark{
+    --pub-bg: transparent;
+    --pub-text: #e5e7eb;
+    --pub-muted: #a3a3a3;
+    --pub-border: #243042;
+
+    --card-bg: #111827;
+    --card-shadow: 0 1px 2px rgba(0,0,0,0.35);
+    --card-shadow-hover: 0 10px 26px rgba(0,0,0,0.45);
+
+    --tag-bg: #1f2937;
+    --tag-text: #e5e7eb;
+    --tag-venue-bg: #083344;
+    --tag-venue-text: #67e8f9;
+    --tag-topic-bg: #1e1b4b;
+    --tag-topic-text: #c7d2fe;
+    --tag-status-bg: #3a1f0a;
+    --tag-status-text: #fdba74;
+
+    --btn-bg: #1f2a3a;
+    --btn-text: #e5e7eb;
+    --btn-border: #39485f;
+    --btn-hover-bg: #e5e7eb;
+    --btn-hover-text: #0b1220;
+    --btn-hover-border: #e5e7eb;
+
+    --link: #5eead4;
+  }
+
+  /* ===== Layout ===== */
+  .pubs { max-width: 980px; margin: 0 auto; padding: 0; background: var(--pub-bg); }
+  .pubs .note { color: var(--pub-muted); margin: 0 0 14px; }
+  .pubs h3 { font-size: 1.25rem; margin: 18px 0 10px; color: var(--pub-text); }
+
+  /* list style (no numbering) */
+  .pubs ul { list-style: none; margin: 0; padding: 0; }
+
+  /* Card blocks per paper */
+  .pubs .pub-list li{
+    margin: 10px 0;
+    padding: 12px 14px;
+    border: 1px solid rgba(17, 24, 39, 0.10);   /* softer border */
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.72);      /* translucent, blends with page bg */
+    backdrop-filter: blur(6px);                  /* optional, looks nicer */
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+
+  .pubs .pub-list li:hover{
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-1px);
+    transition: box-shadow .18s ease, transform .18s ease;
+  }
+
+  .pubs .title { font-weight: 400; } /* not bold */
+  .pubs .venue { font-style: italic; color: var(--pub-muted); }
+  .pubs .meta { color: var(--pub-muted); }
+
+  .pubs a { text-decoration: none; color: var(--link); }
+  .pubs a:hover { text-decoration: underline; }
+
+  /* Tags */
+  .pubs .tags { display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 8px; vertical-align: middle; }
+  .pubs .tag { font-size: 0.82rem; padding: 2px 8px; border-radius: 999px; background: var(--tag-bg); color: var(--tag-text); white-space: nowrap; }
+  .pubs .tag.venue { background: var(--tag-venue-bg); color: var(--tag-venue-text); font-style: normal; }
+  .pubs .tag.topic { background: var(--tag-topic-bg); color: var(--tag-topic-text); }
+  .pubs .tag.status { background: var(--tag-status-bg); color: var(--tag-status-text); }
+
+  /* Link as button */
+.pubs .btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  margin-left: 8px;
+  border-radius: 999px;                 /* pill 更像按钮 */
+  border: 1.5px solid var(--btn-border);/* 更显眼 */
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  font-size: 0.88rem;
+  line-height: 1;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  text-decoration: none !important;
+}
+
+.pubs .btn:hover{
+  background: var(--btn-hover-bg);
+  color: var(--btn-hover-text);
+  border-color: var(--btn-hover-border);
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
 
 
+/* Put this at the VERY END of the page <style> */
+.pubs .pub-list li{
+  background: transparent !important;                 /* == page background */
+  border: 1px solid rgba(17, 24, 39, 0.10) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
+}
 
+/* Dark mode: keep border visible */
+@media (prefers-color-scheme: dark){
+  .pubs .pub-list li{
+    border-color: rgba(229, 231, 235, 0.14) !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.35) !important;
+  }
+}
+html[data-theme="dark"] .pubs .pub-list li,
+html.dark .pubs .pub-list li,
+body.dark .pubs .pub-list li{
+  border-color: rgba(229, 231, 235, 0.14) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.35) !important;
+}
+
+
+</style>
+
+<div class="pubs">
+  <p class="note"><sup>*</sup> co-first author, <sup>†</sup> corresponding author</p>
+
+  <div class="wordwrap">You can also find my papers on <a href="{{site.author.googlescholar}}">Google Scholar</a>.</div>
+
+  <h3>Preprints</h3>
+  <ul class="pub-list">
+    <li>
+      <span class="title">A Causal Approach for Interpretable Reward Redistribution in Visual Reinforcement Learning</span>
+      <span class="tags">
+        <span class="tag topic">Causal RL</span>
+        <span class="tag status">Under Review</span>
+      </span><br/>
+      <span class="meta"><strong>Yudi Zhang</strong>, Yali Du, Biwei Huang, Ziyan Wang, Jun Wang, Meng Fang, Mykola Pechenizkiy.</span>
+      <span class="venue">Under Review</span>.
+    </li>
+
+    <li>
+      <span class="title">Self-Evolving LLM Agents under Offline Data Support.</span>
+      <span class="tags">
+        <span class="tag topic">LLM Agents</span>
+        <span class="tag venue">Preprint</span>
+      </span><br/>
+      <span class="meta"><strong>Yudi Zhang</strong>, Meng Fang, Zhenfang Chen, Mykola Pechenizkiy.</span>
+      <span class="venue">Preprint</span>.
+    </li>
+
+    <li>
+      <span class="title">Distill Not Only Data but Also Rewards: Can Smaller Language Models Surpass Larger Ones?</span>
+      <span class="tags">
+        <span class="tag topic">LLM Agents</span>
+        <span class="tag venue">Preprint</span>
+      </span><br/>
+      <span class="meta"><strong>Yudi Zhang</strong>, Lu Wang, Meng Fang, Yali Du, et al.</span>
+      <span class="venue">Preprint</span>.
+      <a class="btn" href="https://arxiv.org/abs/2502.19557" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+  </ul>
+
+  <br/>
+
+  <h3>Conferences</h3>
+  <ul class="pub-list">
+    <li>
+      <span class="title">Benchmarking Foundation Models with Retrieval-Augmented Generation in Olympic-level Physics Problem Solving.</span>
+      <span class="tags">
+        <span class="tag topic">LLM RAG</span>
+        <span class="tag venue">EMNLP Findings 25</span>
+      </span><br/>
+      <span class="meta">Shunfeng Zheng<sup>*</sup>, <strong>Yudi Zhang</strong><sup>*</sup>, Meng Fang, Zihan Zhang, Zhitan Wu, Mykola Pechenizkiy, Ling Chen.</span>
+      <span class="venue">EMNLP Findings 2025</span>.
+      <a class="btn" href="https://aclanthology.org/2025.findings-emnlp.1196/" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+
+    <li>
+      <span class="title">RuAG: Learned-rule-augmented Generation for Large Language Models.</span>
+      <span class="tags">
+        <span class="tag topic">LLM Agents</span>
+        <span class="tag venue">ICLR 25</span>
+      </span><br/>
+      <span class="meta"><strong>Yudi Zhang</strong><sup>*</sup>, Pei Xiao<sup>*</sup>, Lu Wang, Chaoyun Zhang, Meng Fang, Yali Du, et al.</span>
+      <span class="venue">ICLR 2025</span>.
+      <a class="btn" href="https://openreview.net/forum?id=BpIbnXWfhL" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+
+    <li>
+      <span class="title">Large Language Models are Neurosymbolic Reasoners.</span>
+      <span class="tags">
+        <span class="tag topic">LLM Agents</span>
+        <span class="tag venue">AAAI 24</span>
+      </span><br/>
+      <span class="meta">Meng Fang<sup>*</sup>, Shilong Deng<sup>*</sup>, <strong>Yudi Zhang</strong><sup>*</sup>, Zijing Shi, Ling Chen, Mykola Pechenizkiy, Jun Wang.</span>
+      <span class="venue">AAAI 2024</span>.
+      <a class="btn" href="https://ojs.aaai.org/index.php/AAAI/article/view/29754" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+
+    <li>
+      <span class="title">Interpretable Reward Redistribution in Reinforcement Learning: A Causal Approach.</span>
+      <span class="tags">
+        <span class="tag topic">Causal RL</span>
+        <span class="tag venue">NeurIPS 23</span>
+      </span><br/>
+      <span class="meta"><strong>Yudi Zhang</strong>, Yali Du, Biwei Huang, Ziyan Wang, Jun Wang, Meng Fang, Mykola Pechenizkiy.</span>
+      <span class="venue">NeurIPS 2023</span>.
+      <a class="btn" href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/402e12102d6ec3ea3df40ce1b23d423a-Abstract-Conference.html" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+
+    <li>
+      <span class="title">CAST: A Causality-inspired Spatial-temporal Return Decomposition Approach for Multi-agent RL.</span>
+      <span class="tags">
+        <span class="tag topic">Causal RL</span>
+        <span class="tag venue">NeurIPS 24 CRL Workshop</span>
+      </span><br/>
+      <span class="meta"><strong>Yudi Zhang</strong>, Yali Du, Biwei Huang, Meng Fang, Mykola Pechenizkiy.</span>
+      <span class="venue">NeurIPS 2024 Causal Representation Learning Workshop</span>.
+      <a class="btn" href="https://openreview.net/forum?id=tlNkThyt18" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+
+    <li>
+      <span class="title">Causality Meets Locality: Provably Generalizable and Scalable Policy Learning for Networked Systems.</span>
+      <span class="tags">
+        <span class="tag topic">Causal RL</span>
+        <span class="tag venue">NeurIPS 25</span>
+        <span class="tag status">Spotlight</span>
+      </span><br/>
+      <span class="meta">Hao Liang<sup>*</sup>, Shuqing Shi<sup>*</sup>, <strong>Yudi Zhang</strong>, Biwei Huang, Yali Du.</span>
+      <span class="venue">NeurIPS 2025</span>.
+      <a class="btn" href="https://openreview.net/forum?id=dfcQFL89OM" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+
+    <li>
+      <span class="title">Pillagerbench: Benchmarking LLM-based Agents in Competitive Minecraft Team Environments.</span>
+      <span class="tags">
+        <span class="tag topic">LLM Agents</span>
+        <span class="tag venue">IEEE CoG 25</span>
+        <span class="tag status">Oral</span>
+      </span><br/>
+      <span class="meta">Olivier Schipper, <strong>Yudi Zhang</strong>, Yali Du, Mykola Pechenizkiy, Meng Fang.</span>
+      <span class="venue">IEEE Conference on Games (CoG), 2025</span>.
+      <a class="btn" href="https://ieeexplore.ieee.org/abstract/document/11114387/" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+
+    <li>
+      <span class="title">COOM: A Game Benchmark for Continual Reinforcement Learning.</span>
+      <span class="tags">
+        <span class="tag topic">Continual RL</span>
+        <span class="tag venue">NeurIPS D&amp;B 23</span>
+      </span><br/>
+      <span class="meta">Tristan Tomilin, Meng Fang, <strong>Yudi Zhang</strong>, Mykola Pechenizkiy.</span>
+      <span class="venue">NeurIPS 2023 D&amp;B Track</span>.
+      <a class="btn" href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/d61d9f4fe4357296cb658795fd7999f0-Abstract-Datasets_and_Benchmarks.html" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+
+    <li>
+      <span class="title">RSPT: Reconstruct Surroundings and Predict Trajectories for Generalizable Active Object Tracking.</span>
+      <span class="tags">
+        <span class="tag topic">Embodied AI</span>
+        <span class="tag venue">AAAI 23</span>
+        <span class="tag status">Oral</span>
+      </span><br/>
+      <span class="meta">Fangwei Zhong<sup>*</sup>, Xiao Bi<sup>*</sup>, <strong>Yudi Zhang</strong>, Wei Zhang, Yizhou Wang.</span>
+      <span class="venue">AAAI 2023</span>.
+      <a class="btn" href="https://ojs.aaai.org/index.php/AAAI/article/view/25482" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+  </ul>
+
+  <br/>
+
+  <h3>Journals</h3>
+  <ul class="pub-list">
+    <li>
+      <span class="title">Large action models: From inception to implementation.</span>
+      <span class="tags">
+        <span class="tag topic">LLM Agents</span>
+        <span class="tag venue">TMLR</span>
+      </span><br/>
+      <span class="venue">TMLR 2025</span>.
+      <a class="btn" href="https://arxiv.org/pdf/2412.10047v2" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+
+    <li>
+      <span class="title">MACCA: Offline Multi-agent Reinforcement Learning with Causal Credit Assignment.</span>
+      <span class="tags">
+        <span class="tag topic">Causal RL</span>
+        <span class="tag venue">TMLR</span>
+      </span><br/>
+      <span class="meta">Ziyan Wang, Yali Du, <strong>Yudi Zhang</strong>, Meng Fang, Biwei Huang.</span>
+      <span class="venue">TMLR 2025</span>.
+      <a class="btn" href="https://openreview.net/forum?id=gwUOzI4DuV" target="_blank" rel="noopener noreferrer">Link</a>
+    </li>
+  </ul>
+</div>
