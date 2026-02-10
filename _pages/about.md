@@ -240,9 +240,10 @@ body.dark .about a,               body.dark .cv a{
   </p>
 
   <p>
-    My research focuses on reinforcement learning, especially RL for LLMs and causal RL. And I have published 10+ papers at the top AI conferences. <a href="https://scholar.google.com/citations?user=YOUR_ID&hl=en" target="_blank" rel="noopener noreferrer">
+    My research focuses on reinforcement learning, especially RL for LLMs and causal RL. 
+    <!-- And I have published 10+ papers at the top AI conferences. <a href="https://scholar.google.com/citations?user=YOUR_ID&hl=en" target="_blank" rel="noopener noreferrer">
   <img src="/assets/badges/scholar_citations.svg" alt="Google Scholar citations">
-</a>
+</a> -->
 
   </p>
   <p>
