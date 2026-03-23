@@ -296,7 +296,8 @@ body.dark .about a,               body.dark .cv a{
 <div class="cv">
   <h2>✨ News</h2>
   <ul class="news">
-    <li><span class="date">Feb 2026</span>I’m co-organizing a tutorial on reward modeling for LLMs at CAPL — see you in Tübingen!   <a class="btn" href="pdfs/rm_for_llm_tutorial.pdf" target="_blank" rel="noopener noreferrer">Slides</a> </li> 
+    <li><span class="date">Feb 2026</span>I’m co-organizing a tutorial on reward modeling for LLMs at CAPL — see you in Tübingen!   <a class="btn" href="pdfs/rm_for_llm_tutorial.pdf">Slides</a> 
+    </li> 
     <li><span class="date">Oct 2025</span>One paper was accepted to NeurIPS 2025 as spotlight. ✨</li>
     <li><span class="date">May 2025</span>I will give a tutorial at the OxML Summer School. 🧑‍🏫</li>
     <li><span class="date">May 2025</span>Two papers were accepted by TMLR. </li>
