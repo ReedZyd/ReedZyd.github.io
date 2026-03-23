@@ -81,6 +81,7 @@ My current research interests lie in reinforcement learning (RL), especially RL 
   .about a{ text-decoration: none; color: var(--link); }
   .about a:hover{ text-decoration: underline; }
 
+  .cv .btn,
   .about .btn{
     display: inline-flex;
     align-items: center;
@@ -94,6 +95,8 @@ My current research interests lie in reinforcement learning (RL), especially RL 
     margin-left: 6px;
     white-space: nowrap;
   }
+
+  .cv .btn:hover,
   .about .btn:hover{
     background: var(--btn-hover-bg);
     color: var(--btn-hover-text);
