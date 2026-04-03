@@ -81,6 +81,8 @@ My current research interests lie in reinforcement learning (RL), especially RL 
   .about a{ text-decoration: none; color: var(--link); }
   .about a:hover{ text-decoration: underline; }
 
+  .about .job-market-line{ color: #b91c1c; }
+
   .cv .btn,
   .about .btn{
     display: inline-flex;
@@ -145,20 +147,54 @@ My current research interests lie in reinforcement learning (RL), especially RL 
 
   .cv .muted{ color: var(--muted); }
 
-  /* News: align date for better readability */
+  /* News & similar lists: align date for better readability */
   .cv .news li{ margin: 10px 0; }
   .cv .news .date{
     display: inline-block;
     min-width: 90px;
+    margin-right: 0.65em; /* gap before body text (avoids “presentMax”) */
     color: var(--muted);
     font-weight: 600;
   }
+  /* Internship: two-column rows (date never runs into title) */
+  .cv ul.internships{
+    margin: 0;
+    padding-left: 1.25em;
+  }
+  .cv ul.internships > li{
+    display: grid;
+    grid-template-columns: minmax(7.5rem, 9.75rem) minmax(0, 1fr);
+    column-gap: 1rem;
+    row-gap: 0.2rem;
+    align-items: baseline;
+    margin: 11px 0;
+    line-height: 1.65;
+  }
+  .cv ul.internships .internships-when{
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+  .cv ul.internships .internships-what{ min-width: 0; }
+  @media (max-width: 520px){
+    .cv ul.internships > li{
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .cv ul.cv-nested{
+    margin: 6px 0 4px;
+    padding-left: 1.15em;
+  }
+  .cv ul.cv-nested > li{ margin: 7px 0; }
+
 /* === Dark-mode fix for your custom blocks (put at VERY END) === */
 
 /* 1) Default: follow the site theme (do NOT force black text) */
 .about, .about p,
 .cv, .cv ul, .cv li,
 .cv .news .date,
+.cv ul.internships .internships-when,
 .cv h2 {
   color: inherit;
 }
@@ -175,6 +211,7 @@ My current research interests lie in reinforcement learning (RL), especially RL 
     color: #e5e7eb !important;          /* main text */
   }
   .cv .news .date,
+  .cv ul.internships .internships-when,
   .cv .muted {
     color: #a3a3a3 !important;          /* muted text */
   }
@@ -194,6 +231,7 @@ My current research interests lie in reinforcement learning (RL), especially RL 
     border-color: #e5e7eb !important;
     color: #0b1220 !important;
   }
+  .about .job-market-line{ color: #fca5a5; }
 }
 
 /* 3) Also support manual toggles some sites use */
@@ -206,8 +244,11 @@ body.dark .cv,    body.dark .cv ul, body.dark .cv li{
   color: #e5e7eb !important;
 }
 html[data-theme="dark"] .cv .news .date, html[data-theme="dark"] .cv .muted,
+html[data-theme="dark"] .cv ul.internships .internships-when,
 html.dark .cv .news .date,               html.dark .cv .muted,
-body.dark .cv .news .date,               body.dark .cv .muted{
+html.dark .cv ul.internships .internships-when,
+body.dark .cv .news .date,               body.dark .cv .muted,
+body.dark .cv ul.internships .internships-when{
   color: #a3a3a3 !important;
 }
 html[data-theme="dark"] .about a, html[data-theme="dark"] .cv a,
@@ -215,12 +256,17 @@ html.dark .about a,               html.dark .cv a,
 body.dark .about a,               body.dark .cv a{
   color: #5eead4 !important;
 }
+html[data-theme="dark"] .about .job-market-line,
+html.dark .about .job-market-line,
+body.dark .about .job-market-line{
+  color: #fca5a5;
+}
 </style>
 
 
 <div class="about">
   <p>
-    I am a fourth-year Ph.D. student at
+    I am a final-year Ph.D. student at
     <a href="https://www.tue.nl/en/" target="_blank" rel="noopener noreferrer">Eindhoven University of Technology</a>,
     under the supervision of
     <a href="https://www.win.tue.nl/~mpechen/?_gl=1*iopzok*_ga*NTk4Mzc5NDExLjE2ODA3NzUyNjU.*_ga_JN37M497TT*MTY5ODMzMjE2My4yOC4xLjE2OTgzMzIxODEuNDIuMC4w"
@@ -235,11 +281,18 @@ body.dark .about a,               body.dark .cv a{
     <a href="https://biweihuang.com/" target="_blank" rel="noopener noreferrer">Prof. Biwei Huang</a>
     at
     <a href="https://ucsd.edu/" target="_blank" rel="noopener noreferrer">University of California San Diego</a>.
-    Prior to joining TU/e, I was a master student in
+ 
+    I am currently a visiting student at 
+    <a href="https://is.mpg.de" target="_blank" rel="noopener noreferrer">the Max Planck Institute for Intelligent Systems</a>, 
+    where I work on the intersection of reinforcement learning (RL) and large language models (LLMs), under the supervision of 
+    <a href="https://shiweiliuiiiiiii.github.io" target="_blank" rel="noopener noreferrer">Dr. Shiwei Liu</a>.
+    I was an intern at Microsoft, mentored by 
+    <a href="https://scholar.google.com/citations?user=hqlU92YAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Dr. Lu Wang</a>.
+    I obtained my Master's and Bachelor's degrees at 
     <a href="https://www.en.sdu.edu.cn/" target="_blank" rel="noopener noreferrer">Shandong University</a> (SDU),
     supervised by
     <a href="http://www.vsislab.com/" target="_blank" rel="noopener noreferrer">Prof. Wei Zhang</a>.
-    I also obtained my bachelor's degree from Shandong University.
+
   </p>
 
   <p>
@@ -250,7 +303,7 @@ body.dark .about a,               body.dark .cv a{
 
   </p>
   <p>
-    I am currently on the job market and actively looking for collaboration and visiting opportunities. If you are interested, feel free to contact me.
+    <span class="job-market-line">I am currently on the job market and actively looking for collaboration and visiting opportunities. If you are interested, feel free to contact me.</span>
     <a class="btn" href="mailto:y.zhang5@tue.nl">Email</a>
   </p>
 </div>
@@ -291,14 +344,46 @@ body.dark .about a,               body.dark .cv a{
   .cv .news .date{
     display: inline-block;
     min-width: 90px;      /* aligns month-year */
+    margin-right: 0.65em; /* gap before body text */
     color: #374151;
     font-weight: 600;
   }
+  .cv ul.internships{
+    margin: 0;
+    padding-left: 1.25em;
+  }
+  .cv ul.internships > li{
+    display: grid;
+    grid-template-columns: minmax(7.5rem, 9.75rem) minmax(0, 1fr);
+    column-gap: 1rem;
+    row-gap: 0.2rem;
+    align-items: baseline;
+    margin: 11px 0;
+    line-height: 1.65;
+  }
+  .cv ul.internships .internships-when{
+    color: #374151;
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+  .cv ul.internships .internships-what{ min-width: 0; }
+  @media (max-width: 520px){
+    .cv ul.internships > li{
+      grid-template-columns: 1fr;
+    }
+  }
+  .cv ul.cv-nested{
+    margin: 6px 0 4px;
+    padding-left: 1.15em;
+  }
+  .cv ul.cv-nested > li{ margin: 7px 0; }
 </style>
 
 <div class="cv">
   <h2>✨ News</h2>
   <ul class="news">
+    <li><span class="date">Apr 2026</span>Start a new journey at the Max Planck Institute for Intelligent Systems!</li>
+    <li><span class="date">Feb 2026</span>One paper was accepted by AAMAS 2026.</li>
     <li><span class="date">Feb 2026</span>I’m co-organizing a tutorial on reward modeling for LLMs at CPAL — see you in Tübingen!   <a class="btn" href="pdfs/rm_for_llm_tutorial.pdf">Slides</a> 
     </li> 
     <li><span class="date">Oct 2025</span>One paper was accepted to NeurIPS 2025 as spotlight. ✨</li>
@@ -315,41 +400,52 @@ body.dark .about a,               body.dark .cv a{
 
   <!-- <div class="divider"></div> -->
 
-  <h2>📚 Service</h2>
-  <ul>
-    <li>Journal Reviewer: Transactions on Machine Learning Research, IEEE Transactions on Artificial Intelligence.</li>
-    <li>Conference Reviewer: NeurIPS 2024-2025, ICML 2024-2026, ICLR 2025-2026, AAAI 2025-2026, AAMAS 2024-2025, AISTATS 2025.</li>
-    <li>Teaching Assistant: Generative AI in OxML 2024, 2IIG0 Data Mining and Machine Learning.</li>
-    <li>Supervised MSc students: Schipper Olivier, Beuningen Niels van, Dirk Michielsen, Xie Lan.</li>
-  </ul>
-
   <h2>🧑‍💻 Internship</h2>
-  <ul>
+  <ul class="internships">
     <li>
-      Microsoft Research Asia, mentored by
-      <a href="https://scholar.google.com/citations?user=hqlU92YAAAAJ" target="_blank" rel="noopener noreferrer">Dr. Lu Wang</a>,
-      2024.
+      <span class="internships-when">Apr 2026 – present</span>
+      <span class="internships-what">Max Planck Institute for Intelligent Systems — visiting student, supervised by <a href="https://shiweiliuiiiiiii.github.io" target="_blank" rel="noopener noreferrer">Dr. Shiwei Liu</a>.</span>
+    </li>
+    <li>
+      <span class="internships-when">Mar – Oct 2024</span>
+      <span class="internships-what">Microsoft — research intern, mentored by <a href="https://scholar.google.com/citations?user=hqlU92YAAAAJ" target="_blank" rel="noopener noreferrer">Dr. Lu Wang</a>.</span>
     </li>
   </ul>
 
-  <!-- <div class="divider"></div> -->
+  <h2>📚 Service &amp; activities</h2>
+  <ul>
+    <li><strong>Reviewer:</strong> TMLR, IEEE Transactions on Artificial Intelligence, NeurIPS, ICML, ICLR, ACL, AAAI, AISTATS, AAMAS.</li>
+    <li><strong>Tutorial:</strong> Reward Modeling in Large Language Models: Principles, Methods, and Challenges (CPAL 2026). <a class="btn" href="pdfs/rm_for_llm_tutorial.pdf">Slides</a></li>
+    <li><strong>Teaching assistant:</strong> Generative AI in OxML 2024; 2IIG0 Data Mining and Machine Learning (2025).</li>
+    <li>
+      <strong>Supervised MSc theses:</strong>
+      <ul class="cv-nested">
+        <li>Olivier T. Schipper (Apr 2025), <a href="https://research.tue.nl/en/studentTheses/pillagerbench/" target="_blank" rel="noopener noreferrer">PillagerBench: a benchmark and framework for competitive multi-agent Minecraft environments</a>, published in IEEE CoG.</li>
+        <li>Niels P.G.T. van Beuningen (Jul 2025), <a href="https://research.tue.nl/en/studentTheses/hearthgym/" target="_blank" rel="noopener noreferrer">HearthGym: A Gymnasium Benchmark for Advanced Hearthstone AI Research</a>.</li>
+        <li>Dirk Michielsen (Feb 2026), HearthstoneGUI: GUI Agent for Hearthstone.</li>
+        <li>Lan Xie (ongoing).</li>
+      </ul>
+    </li>
+    <li><strong>Leadership:</strong> Vice President, Student Union, School of Control Science and Engineering, Shandong University (2018); Captain (Deputy Head), “Lianxin” Volunteer Teaching Program, Shandong University (2018); Class Monitor, Automation Class 1 (Cohort 2015), Shandong University (2015–2019).</li>
+  </ul>
 
+  <!-- <div class="divider"></div> -->
 
   <h2>🌟 Awards</h2>
   <ul>
-    <li>NeurIPS 2023 Travel Award</li>
-    <li>Outstanding Graduates of Shandong Province (2019)</li>
-    <li class="muted">
-      Competitions: Second Prize in the Chinese Graduate Mathematical Modeling Competition (2019),
-      First Prize in the National Electronic Design Competition, Shandong Province (2017),
-      International Aquatic Robot Competition Champion (2018, 2019)
-    </li>
-    <li class="muted">
-      Scholarships: Shandong University first-class scholarship, Shandong University outstanding students special scholarship, etc.
-    </li>
+    <li><strong>Travel awards:</strong> NeurIPS 2023, ICLR 2025.</li>
+    <li><strong>Honors:</strong> Outstanding Graduate of Shandong Province (2019).</li>
+    <li class="muted"><strong>Competitions:</strong> 2nd Prize, Chinese Graduate Mathematical Modeling Competition (2019); 1st Prize, National Electronic Design Competition, Shandong Province (2017); Champion, International Aquatic Robot Competition (2018, 2019).</li>
+    <li class="muted"><strong>Scholarships:</strong> First-Class Scholarship (2017–2021); Outstanding Student Special Scholarship (2019, top 2%), etc.</li>
   </ul>
 
-  <!-- <div class="divider"></div> -->
-
+  <h2>💻 Programming skills</h2>
+  <ul>
+    <li><strong>Languages:</strong> Python, C/C++, Bash.</li>
+    <li><strong>ML / LLM tooling:</strong> PyTorch, TensorFlow/Keras, TRL, Verl, MS-Swift, PEFT/LoRA, vLLM.</li>
+    <li><strong>NLP / RL algorithms:</strong> PPO/GRPO, DPO, RLOO, A3C, SAC, DDPG.</li>
+    <li><strong>Systems &amp; robotics:</strong> Linux, Git, Docker, Gym/Gymnasium, ROS, NVIDIA Jetson Xavier.</li>
+    <li><strong>Compute &amp; platforms:</strong> Snellius, Slurm, H100/A100/V100/RTX 4090/2080 Ti.</li>
+  </ul>
 
 </div>
