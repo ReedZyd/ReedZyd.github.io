@@ -382,6 +382,8 @@ body.dark .about .job-market-line{
 <div class="cv">
   <h2>✨ News</h2>
   <ul class="news">
+    <li><span class="date">May 2026</span>One paper was accepted by RLC 2026. See you in Canada!</li>
+    <li><span class="date">May 2026</span>One paper was accepted by ICML 2026. See you in Korea!</li>
     <li><span class="date">Apr 2026</span>Start a new journey at the Max Planck Institute for Intelligent Systems!</li>
     <li><span class="date">Feb 2026</span>One paper was accepted by AAMAS 2026.</li>
     <li><span class="date">Feb 2026</span>I’m co-organizing a tutorial on reward modeling for LLMs at CPAL — see you in Tübingen!   <a class="btn" href="pdfs/rm_for_llm_tutorial.pdf">Slides</a> 
