@@ -9,7 +9,7 @@ redirect_from:
   - /publications/
 ---
 
-I am a postdoctoral researcher at [TU Delft](https://www.tudelft.nl/en/), working with [Frans A. Oliehoek](https://fransoliehoek.net/) and [Jan-Willem van de Meent](https://amlab-amsterdam.github.io/people/JanWillemVanDeMeent/) @[UvA](https://www.uva.nl/en). I am also a visiting student at [MPI-IS](https://is.mpg.de), supervised by [Shiwei Liu](https://shiweiliuiiiiiii.github.io). I obtained my Ph.D. from [TU/e](https://www.tue.nl/en/), supervised by [Mykola Pechenizkiy](https://www.win.tue.nl/~mpechen/) and [Meng Fang](https://mengf1.github.io/), and I am very fortunate to have worked closely with [Yali Du](https://yalidu.github.io/) @[KCL](https://www.kcl.ac.uk/) and [Biwei Huang](https://biweihuang.com/) @[UCSD](https://ucsd.edu/). Previously, I was a research intern at Microsoft, and I obtained my Master's and Bachelor's degrees at [SDU](https://www.en.sdu.edu.cn/).
+I am a postdoctoral researcher at [TU Delft](https://www.tudelft.nl/en/), working with [Frans A. Oliehoek](https://fransoliehoek.net/) and [Jan-Willem van de Meent](https://amlab-amsterdam.github.io/people/JanWillemVanDeMeent/) @[UvA](https://www.uva.nl/en). I am also a visiting researcher at [MPI-IS](https://is.mpg.de), supervised by [Shiwei Liu](https://shiweiliuiiiiiii.github.io). I obtained my Ph.D. from [TU/e](https://www.tue.nl/en/), supervised by [Mykola Pechenizkiy](https://www.win.tue.nl/~mpechen/) and [Meng Fang](https://mengf1.github.io/), and I am very fortunate to have worked closely with [Yali Du](https://yalidu.github.io/) @[KCL](https://www.kcl.ac.uk/) and [Biwei Huang](https://biweihuang.com/) @[UCSD](https://ucsd.edu/). Previously, I was a research intern at Microsoft, and I obtained my Master's and Bachelor's degrees at [SDU](https://www.en.sdu.edu.cn/).
 
 My research focuses on **learning agents**: agents that improve from experience and feedback.
 
@@ -27,9 +27,9 @@ My research focuses on **learning agents**: agents that improve from experience 
 
 <details class="fold" open>
 <summary>🧑‍💻 Experience</summary>
-<div class="entry compact"><div class="when">Sep 2026 – present</div><div class="what"><strong>TU Delft</strong>, Postdoctoral researcher<br><span class="sub">Supervisors: <a href="https://fransoliehoek.net/">Frans A. Oliehoek</a>, <a href="https://amlab-amsterdam.github.io/people/JanWillemVanDeMeent/">Jan-Willem van de Meent</a></span></div></div>
-<div class="entry compact"><div class="when">Apr 2026 – present</div><div class="what"><strong>MPI-IS</strong>, Visiting student <span class="sub">· Supervisor: <a href="https://shiweiliuiiiiiii.github.io">Shiwei Liu</a></span></div></div>
-<div class="entry compact"><div class="when">Mar – Oct 2024</div><div class="what"><strong>Microsoft</strong>, Research intern <span class="sub">· Mentor: <a href="https://scholar.google.com/citations?user=hqlU92YAAAAJ&hl=en">Lu Wang</a></span></div></div>
+<div class="entry compact"><div class="when">Sep 2026 – present</div><div class="what">TU Delft, Postdoctoral researcher<br><span class="sub">Supervisors: <a href="https://fransoliehoek.net/">Frans A. Oliehoek</a>, <a href="https://amlab-amsterdam.github.io/people/JanWillemVanDeMeent/">Jan-Willem van de Meent</a></span></div></div>
+<div class="entry compact"><div class="when">Apr 2026 – present</div><div class="what">MPI-IS, Visiting researcher <span class="sub">· Supervisor: <a href="https://shiweiliuiiiiiii.github.io">Shiwei Liu</a></span></div></div>
+<div class="entry compact"><div class="when">Mar – Oct 2024</div><div class="what">Microsoft, Research intern <span class="sub">· Mentor: <a href="https://scholar.google.com/citations?user=hqlU92YAAAAJ&hl=en">Lu Wang</a></span></div></div>
 </details>
 
 <details class="fold" open>
