@@ -15,7 +15,7 @@ I obtained my Ph.D. from [Eindhoven University of Technology](https://www.tue.nl
 
 My research focuses on reinforcement learning, especially RL for LLMs and causal RL.
 
-<span style="color:#b91c1c">I am currently on the job market and actively looking for my next position, as well as visiting and collaboration opportunities. If you are interested, feel free to contact me.</span> [Email](mailto:y.zhang5@tue.nl)
+<span style="color:#b91c1c">I am currently on the job market and actively looking for my next position, as well as visiting and collaboration opportunities. If you are interested, feel free to contact me.</span> [Email](mailto:yudizhangzhang@tudelft.nl)
 
 ## 🎓 Education
 
@@ -53,8 +53,8 @@ My research focuses on reinforcement learning, especially RL for LLMs and causal
 - **{{ n.date }}** — {{ n.text }}
 {% endfor %}
 
-[All news &rarr;](/news/) &middot; [Service](/service/) &middot; [Awards](/awards/) &middot; [Skills](/skills/)
+[All news &rarr;](/news/)
 
-## 📄 Publications
+## 📄 Publications {#publications}
 
 {% include publications.html %}
