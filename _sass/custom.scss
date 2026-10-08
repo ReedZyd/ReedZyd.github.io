@@ -72,7 +72,8 @@ body {
 }
 .entry .what { min-width: 0; }
 .entry .what .sub { color: var(--global-text-color-light); font-size: 0.93rem; }
-.entry.compact { margin-bottom: 0.55em; }
+.entry.compact { margin-bottom: 0.4em; }
+.entry.compact .what .sub { font-size: 0.9rem; }
 
 @media (max-width: 600px) {
   .entry { grid-template-columns: 1fr; row-gap: 0.1em; }
@@ -90,3 +91,43 @@ html[data-theme="dark"] .open-line { color: #f08a8a; }
 .page__footer a, .page__footer footer a { color: var(--global-text-color-light); }
 .page__footer footer { color: var(--global-text-color-light); }
 html[data-theme="dark"] .page__footer { background: var(--global-footer-bg-color, #1b1b1b); }
+
+/* ----- Section heading with a right-aligned note on the same line ----- */
+.section-head {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  column-gap: 1em;
+}
+.section-head .head-note {
+  font-size: 0.82rem; font-weight: 400; color: var(--global-text-color-light);
+}
+
+/* ----- Collapsible sections (Education / Experience) ----- */
+details.fold { margin: 2.2em 0 0; }
+details.fold + details.fold { margin-top: 1.4em; }
+details.fold > summary {
+  list-style: none; cursor: pointer; user-select: none;
+  padding-bottom: 0.35em;
+  font-size: 1.15rem; font-weight: 600; letter-spacing: 0.01em;
+  border-bottom: 1px solid var(--global-border-color);
+  display: flex; align-items: baseline; gap: 0.5em;
+}
+details.fold > summary::-webkit-details-marker { display: none; }
+details.fold > summary::after {
+  content: "\25B8"; margin-left: auto; font-size: 0.9rem;
+  color: var(--global-text-color-light); transition: transform .15s ease;
+}
+details.fold[open] > summary::after { transform: rotate(90deg); }
+details.fold > summary:hover { color: var(--global-link-color); }
+details.fold > .entry:first-of-type { margin-top: 0.8em; }
+
+details.fold > summary .head-note {
+  margin-left: auto; font-size: 0.82rem; font-weight: 400; color: var(--global-text-color-light);
+}
+details.fold > summary:has(.head-note)::after { margin-left: 0.7em; }
+details.fold > summary .head-note a { color: var(--global-link-color); }
+
+/* ----- Inner pages (News / Service / Awards): same look as the home sections ----- */
+/* The nav bar already names the page, so the page title is hidden. */
+.archive .page__title { display: none; }
+.archive .page__content > h2:first-of-type { margin-top: 0; }
+.archive .entry.compact { margin-bottom: 0.55em; }
