@@ -1,0 +1,4 @@
+{% assign items = site.data.news %}
+{% if include.limit %}{% assign items = items | slice: 0, include.limit %}{% endif %}
+{% for n in items %}<div class="entry compact"><div class="when">{{ n.date }}</div><div class="what">{{ n.text | markdownify | remove: '<p>' | remove: '</p>' }}</div></div>
+{% endfor %}

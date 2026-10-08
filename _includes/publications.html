@@ -182,13 +182,49 @@ body.dark .pubs .pub-list li{
 }
 
 
+
+/* ===== Flat, minimal list (overrides cards) ===== */
+.pubs a{ color: var(--global-link-color); }
+.pubs br + br{ display: none; }
+.pubs .pub-list li{
+  background: var(--global-bg-color) !important;
+  border: 1px solid var(--global-border-color) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+  margin: 0 0 12px !important;
+  padding: 12px 16px !important;
+  transition: border-color .15s ease;
+}
+.pubs .pub-list li:hover{ border-color: var(--global-dark-border-color) !important; box-shadow: none !important; transform: none !important; }
+.pubs h3{ font-size: 1.02rem; font-weight: 600; margin: 1.6em 0 0.4em; }
+.pubs .title{ font-weight: 600; color: var(--global-text-color); }
+.pubs .meta{ color: var(--global-text-color-light); }
+.pubs .tag{
+  border: 0 !important; border-radius: 4px; padding: 1px 8px; font-size: 0.8rem; font-weight: 600;
+  background: #eef0f2 !important; color: #444 !important;
+}
+.pubs .tag.venue{ background: #e3edfb !important; color: #14498f !important; }
+.pubs .tag.topic{ background: #e3f3ea !important; color: #17663a !important; }
+.pubs .tag.status{ background: #fdf0d9 !important; color: #8a5300 !important; }
+html[data-theme="dark"] .pubs .tag{ background: #2a2f36 !important; color: #d0d4d9 !important; }
+html[data-theme="dark"] .pubs .tag.venue{ background: #1d3350 !important; color: #a9c9f2 !important; }
+html[data-theme="dark"] .pubs .tag.topic{ background: #1a3a2a !important; color: #9bdcb5 !important; }
+html[data-theme="dark"] .pubs .tag.status{ background: #3d2f14 !important; color: #f0c880 !important; }
+.pubs a.pub-link{
+  padding: 0 7px; margin-left: 6px; border-radius: 3px;
+  background: transparent; box-shadow: none;
+  font-size: 0.8rem; font-weight: 500; line-height: 1.6;
+  border: 1px solid var(--global-dark-border-color);
+  color: var(--global-link-color);
+}
+.pubs a.pub-link:hover{ background: var(--global-link-color); color: #fff; border-color: var(--global-link-color); }
 </style>
 
 <div class="pubs">
-  <div class="wordwrap">You can also find my papers on <a href="{{site.author.googlescholar}}">Google Scholar</a>.</div>
-  
-  <br/>
-  <p class="note"><sup>*</sup> co-first author, <sup>†</sup> corresponding author</p>
+  <p class="note">Full list at <a href="{{site.author.googlescholar}}">Google Scholar</a> &nbsp;&middot;&nbsp; <sup>*</sup> co-first author</p>
 
 
   <h3>Preprints</h3>
